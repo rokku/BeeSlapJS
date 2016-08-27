@@ -8,7 +8,6 @@ class Queen extends Bee {
 		this.type = 'queen';
 	}
 
-
 }
 
 var queens = new Queen(3,army);

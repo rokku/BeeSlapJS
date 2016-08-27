@@ -28,4 +28,20 @@ class Bee {
 		document.body.appendChild(battleground);
 	}
 
+	hit(soldier,health) {
+		alert(`Soldier ${soldier} hit!`);
+		army[soldier].health = army[soldier].health-5;
+		console.log(army[soldier].health)
+	}
+
+	prepareForBattle() {
+	    var soldiers = document.querySelectorAll('li');
+	    var i=0;
+	    soldiers.forEach(function () {
+	    	let o = i;
+	        soldiers[o].addEventListener('click', e => { bees.hit(o,army[o].health);})
+	        i++;
+	    });
+	}
+
 }

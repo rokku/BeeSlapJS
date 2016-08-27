@@ -68,6 +68,26 @@ var Bee = function () {
 
 			document.body.appendChild(battleground);
 		}
+	}, {
+		key: 'hit',
+		value: function hit(soldier, health) {
+			alert('Soldier ' + soldier + ' hit!');
+			army[soldier].health = army[soldier].health - 5;
+			console.log(army[soldier].health);
+		}
+	}, {
+		key: 'prepareForBattle',
+		value: function prepareForBattle() {
+			var soldiers = document.querySelectorAll('li');
+			var i = 0;
+			soldiers.forEach(function () {
+				var o = i;
+				soldiers[o].addEventListener('click', function (e) {
+					bees.hit(o, army[o].health);
+				});
+				i++;
+			});
+		}
 	}]);
 
 	return Bee;
