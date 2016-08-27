@@ -2,18 +2,14 @@
 var gulp = require('gulp');
 
 // Include Our Plugins
-var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-
-// Lint JS
-gulp.task('lint', function() {
-    return gulp.src('src/js/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
-});
+const sourcemaps = require('gulp-sourcemaps');
+const babel = require('gulp-babel');
+watch = require('gulp-watch');
+var browserSync = require('browser-sync').create();
 
 // Compile sass
 gulp.task('sass', function() {
@@ -24,8 +20,11 @@ gulp.task('sass', function() {
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-    return gulp.src('src/js/*.js')
+    return gulp.src('src/js/**/*.js')
         .pipe(concat('all.js'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
@@ -34,9 +33,16 @@ gulp.task('scripts', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['lint', 'scripts']);
-    gulp.watch('scss/*.scss', ['sass']);
+    gulp.watch('src/js/**/*.js', ['scripts']);
+    gulp.watch('src/scss/*.scss', ['sass']);
+});
+
+// Static server
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: "dist"
+    });
 });
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);
+gulp.task('default', ['sass', 'scripts', 'watch','browser-sync']);

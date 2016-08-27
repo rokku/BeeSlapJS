@@ -1,0 +1,23 @@
+$font-size: 20px;
+
+ul {
+	display:block;
+	list-style:none;
+	margin:auto;
+	padding:0;
+	width: 50%;
+
+	li {
+		min-width: 8em;
+		min-height: 4em;
+		border: 1px solid;
+		font-family: sans-serif;
+		text-align: center;
+		font-size: $font-size;
+		display: block;
+		background: yellow; 
+		float:left;text-align: center;
+		vertical-align: middle;
+		line-height: 2em;
+	}
+}
