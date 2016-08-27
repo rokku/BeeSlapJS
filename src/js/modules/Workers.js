@@ -5,9 +5,9 @@ class Worker extends Bee {
 		this.health = 75; // This doesn't change for each new Queen bee
 		this.amount = amount;
 		this.army = army;
+		this.damage = 12;
 		this.type = 'worker';
 	}
-
 
 }
 

@@ -5,9 +5,9 @@ class Drone extends Bee {
 		this.health = 50; // This doesn't change for each new Queen bee
 		this.amount = amount;
 		this.army = army;
+		this.damage = 15;
 		this.type = 'drone';
 	}
-
 
 }
 

@@ -11,7 +11,8 @@ class Bee {
 		var soldier = {
 			name: `${this.type}${i}`,
 			type: this.type,
-			health: this.health
+			health: this.health,
+			damage: this.damage
 		}
 		return soldier;
 	}
@@ -28,19 +29,37 @@ class Bee {
 		document.body.appendChild(battleground);
 	}
 
-	hit(soldier,health) {
-		alert(`Soldier ${soldier} hit!`);
-		army[soldier].health = army[soldier].health-5;
-		console.log(army[soldier].health)
+	hit(id,soldier,health) {
+
+		army[soldier].health = army[soldier].health-army[soldier].damage;
+
+		var j = document.getElementById(id);
+		j.innerHTML = `${army[soldier].type}<br/>${army[soldier].health}`
+
 	}
 
 	prepareForBattle() {
-	    var soldiers = document.querySelectorAll('li');
-	    var i=0;
-	    soldiers.forEach(function () {
-	    	let o = i;
-	        soldiers[o].addEventListener('click', e => { bees.hit(o,army[o].health);})
-	        i++;
+	    var weapon = document.getElementById('attack');
+	    weapon.addEventListener('click', e => { 
+
+	    	var randomBeeKey = Math.floor(Math.random() * army.length);
+        	var randomBee = army[randomBeeKey];
+        	if(randomBee.health > 0) {
+        		
+	        	this.hit(randomBee.name,randomBeeKey,randomBee.health);
+
+	        	var j = document.getElementById(randomBee.name);
+
+	        	j.classList.toggle('hit');
+
+	        	setTimeout(() => {
+	        		j.classList.toggle('hit');
+	        	}, 500);
+        	}
+        	else {
+        		this.prepareForBattle();
+        	}
+
 	    });
 	}
 
