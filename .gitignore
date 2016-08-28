@@ -2,3 +2,4 @@ vendor/*
 node_modules/*
 dist/css/*
 dist/*.js
+dis/*.min.js
