@@ -21,14 +21,11 @@ gulp.task('sass', function() {
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
     return gulp.src('src/js/**/*.js')
-        .pipe(concat('all.js'))
         .pipe(babel({
             presets: ['es2015']
         }))
+        .pipe(concat('all.js'))
         .pipe(gulp.dest('dist'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
 });
 
 // Watch Files For Changes
