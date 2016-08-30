@@ -18,7 +18,7 @@ class Bee {
 	}
 
 	fillBattleground() {
-		var i;
+
 		var battleground = document.createElement('ul');
 		army.forEach(function ({name,type,health}) {
 
@@ -27,6 +27,7 @@ class Bee {
 		});
 
 		document.body.appendChild(battleground);
+
 	}
 
 	hit(id,soldier,health) {
@@ -34,18 +35,47 @@ class Bee {
 		army[soldier].health = army[soldier].health-army[soldier].damage;
 
 		var j = document.getElementById(id);
-		j.innerHTML = `${army[soldier].type}<br/>${army[soldier].health}`
+
+		if(army[soldier].health <= 0) { 
+
+			army[soldier].health=0; // set its health to zero
+
+			j.innerHTML = `${army[soldier].type}<br/>${army[soldier].health}`
+			j.classList.toggle('dead'); // show it as dead (RIP)
+
+
+			//now remove it from `army` so it stops being counted
+			while (army.indexOf(army[soldier].name) !== -1) {
+				army.splice(army.indexOf(army[soldier].name), 1);
+			}
+
+		}
+
+		else {
+
+			j.innerHTML = `${army[soldier].type}<br/>${army[soldier].health}`;
+			
+
+		}
+		
 
 	}
 
+	pickABee() {
+		var thisKey = Math.floor(Math.random() * army.length);
+		return thisKey;
+	}
+
 	prepareForBattle() {
+
 	    var weapon = document.getElementById('attack');
 	    weapon.addEventListener('click', e => { 
 
-	    	var randomBeeKey = Math.floor(Math.random() * army.length);
-        	var randomBee = army[randomBeeKey];
+	    	var randomBeeKey = this.pickABee();
+	        var randomBee = army[randomBeeKey];
+
         	if(randomBee.health > 0) {
-        		
+
 	        	this.hit(randomBee.name,randomBeeKey,randomBee.health);
 
 	        	var j = document.getElementById(randomBee.name);
@@ -55,9 +85,13 @@ class Bee {
 	        	setTimeout(() => {
 	        		j.classList.toggle('hit');
 	        	}, 500);
+
         	}
+
         	else {
+
         		this.prepareForBattle();
+
         	}
 
 	    });

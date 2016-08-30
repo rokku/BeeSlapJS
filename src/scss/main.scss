@@ -20,11 +20,16 @@ ul {
 		font-family: sans-serif;
 		text-align: center;
 		font-size: $font-size;
-		display: block;
+		display: inline-block;
 		background: yellow; 
-		float:left;text-align: center;
+		text-align: center;
 		vertical-align: middle;
 		line-height: 2em;
+		&.dead {
+		    background: black;
+		    color: grey;
+		    border: black 1px solid;
+		}
 	}
 }
 
