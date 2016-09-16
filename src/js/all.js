@@ -21,3 +21,4 @@ appropriate amount of damage, and show which bee was damaged (and its new health
 
 var army = [];
 
+const beeArmy = {size: 20}

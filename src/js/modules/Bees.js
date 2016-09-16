@@ -39,14 +39,24 @@ class Bee {
 		if(army[soldier].health <= 0) { 
 
 			army[soldier].health=0; // set its health to zero
+			console.log(army[soldier]);
+			var index = army.indexOf(army[soldier]);
+			console.log(index);
+
+
+			beeArmy.size = beeArmy.size - 1; // Reduce the size of the army by 1 (cos dead bee)
 
 			j.innerHTML = `${army[soldier].type}<br/>${army[soldier].health}`
 			j.classList.toggle('dead'); // show it as dead (RIP)
 
 
 			//now remove it from `army` so it stops being counted
-			while (army.indexOf(army[soldier].name) !== -1) {
-				army.splice(army.indexOf(army[soldier].name), 1);
+			if (index > -1) {
+			    army.splice(index, 1);
+			}
+
+			if(beeArmy.size === 0) {
+				alert('Game over!');
 			}
 
 		}
@@ -62,7 +72,7 @@ class Bee {
 	}
 
 	pickABee() {
-		var thisKey = Math.floor(Math.random() * army.length);
+		var thisKey = Math.floor(Math.random() * beeArmy.size);
 		return thisKey;
 	}
 
