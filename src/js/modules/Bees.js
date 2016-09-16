@@ -39,10 +39,8 @@ class Bee {
 		if(army[soldier].health <= 0) { 
 
 			army[soldier].health=0; // set its health to zero
-			console.log(army[soldier]);
+			
 			var index = army.indexOf(army[soldier]);
-			console.log(index);
-
 
 			beeArmy.size = beeArmy.size - 1; // Reduce the size of the army by 1 (cos dead bee)
 
