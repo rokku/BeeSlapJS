@@ -9,3 +9,5 @@ As of Sept 16, 2016, this is a first complete pass at the game; some definite ti
 1. Download repo
 2. `npm install` for dependencies
 3. `gulp` for script process/concat/etc and launch of a local server.
+
+Updating Readme for issue test
