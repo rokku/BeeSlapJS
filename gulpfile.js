@@ -30,8 +30,8 @@ gulp.task('scripts', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('src/js/**/*.js', ['scripts']);
-    gulp.watch('src/scss/*.scss', ['sass']);
+    gulp.watch('src/js/**/*.js', gulp.series('scripts'));
+    gulp.watch('src/scss/*.scss', gulp.series('sass'));
 });
 
 // Static server
@@ -42,4 +42,4 @@ gulp.task('browser-sync', function() {
 });
 
 // Default Task
-gulp.task('default', ['sass', 'scripts', 'watch','browser-sync']);
+gulp.task('default', gulp.parallel('sass', 'scripts', 'watch', 'browser-sync'));
